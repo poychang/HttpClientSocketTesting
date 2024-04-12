@@ -19,11 +19,12 @@ host.Run();
 
 class Startup(IHttpClientFactory httpClientFactory, HttpClient httpClient) : IHostedService
 {
-    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
-    private readonly HttpClient _httpClient = httpClient;
-    const string url = "https://localhost:7016/WeatherForecast";
-    const int count = 100;
     private static HttpClient _staticHttpClient = new HttpClient();
+    private readonly HttpClient _httpClient = httpClient;
+    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
+
+    const string url = "https://localhost:7016/WeatherForecast";
+    const int count = 10;
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
@@ -96,8 +97,5 @@ class Startup(IHttpClientFactory httpClientFactory, HttpClient httpClient) : IHo
         }
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
-    }
+    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 }
