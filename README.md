@@ -38,3 +38,7 @@ while ($true) { cls; Write-Output "Current: $(Get-Date)"; netstat -na | Select-S
 在 TCP/IP 網絡協議中，當一個連接處於 `TIME_WAIT` 狀態時，它通常會保持這個狀態大約 2 個 Maximum Segment Lifetime（MSL）的時間，MSL 是定義 TCP/IP 網絡中任何數據包在網絡內最大生存時間的參數。
 
 一般來說，MSL 的典型值是 2 分鐘（120 秒），所以 `TIME_WAIT` 狀態通常會持續大約 4 分鐘（240 秒）。然而，這個值可以根據操作系統和網路配置而有所不同。
+
+## Repository
+
+[poychang/HttpClientSocketTesting](https://github.com/poychang/HttpClientSocketTesting)
