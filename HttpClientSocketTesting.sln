@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34707.107
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerSide", "ServerSide\ServerSide.csproj", "{FE32AD7E-1F25-4223-977E-4D83ECB13D2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerSide", "ServerSide\ServerSide.csproj", "{FE32AD7E-1F25-4223-977E-4D83ECB13D2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientSide", "HttpClientSide\HttpClientSide.csproj", "{A3335F3C-5AC2-4ADE-9285-5DC432C8F443}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpClientSide", "HttpClientSide\HttpClientSide.csproj", "{A3335F3C-5AC2-4ADE-9285-5DC432C8F443}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C6F23A38-0397-4680-A1B4-98FAB4BFE83D}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

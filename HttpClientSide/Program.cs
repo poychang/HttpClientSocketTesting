@@ -34,7 +34,7 @@ class Startup(IHttpClientFactory httpClientFactory, HttpClient httpClient) : IHo
         // Version 3: use static HttpClient and reuse it
         //TestHttpClientVersion3(url);
         // Version 4: inject HttpClient instance and reuse it
-        //TestHttpClientVersion4(_httpClient,url);
+        //TestHttpClientVersion4(_httpClient, url);
         // Version 5: inject HttpClientFactory and create HttpClient instance by it
         //TestHttpClientVersion5(_httpClientFactory, url);
 
@@ -78,7 +78,7 @@ class Startup(IHttpClientFactory httpClientFactory, HttpClient httpClient) : IHo
             {
                 httpClient.GetAsync(url).GetAwaiter().GetResult().Content.ReadAsStringAsync().GetAwaiter().GetResult();
                 Console.WriteLine(i);
-                Thread.Sleep(200_000);
+                Thread.Sleep(0_100);
             }
         }
 

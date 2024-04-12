@@ -34,3 +34,7 @@ while ($true) { cls; Write-Output "Current: $(Get-Date)"; netstat -na | Select-S
 - `CLOSED` 連接已經完全終止，不再使用
 
 其中當 socket 處於 `TIME_WAIT` 狀態時，該 socket 的端口號是不能立即被其他新的連接使用的。`TIME_WAIT` 狀態存在的主要原因是為了確保在同一個連接的**舊**數據包在網絡中完全消失，這樣它們就不會被誤解為新連接的數據包。這是 TCP 協議的一部分，旨在確保可靠性和數據完整性。
+
+在 TCP/IP 網絡協議中，當一個連接處於 `TIME_WAIT` 狀態時，它通常會保持這個狀態大約 2 個 Maximum Segment Lifetime（MSL）的時間，MSL 是定義 TCP/IP 網絡中任何數據包在網絡內最大生存時間的參數。
+
+一般來說，MSL 的典型值是 2 分鐘（120 秒），所以 `TIME_WAIT` 狀態通常會持續大約 4 分鐘（240 秒）。然而，這個值可以根據操作系統和網路配置而有所不同。
