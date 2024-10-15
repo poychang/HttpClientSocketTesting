@@ -23,25 +23,29 @@ class Startup(IHttpClientFactory httpClientFactory, HttpClient httpClient) : IHo
     private readonly HttpClient _httpClient = httpClient;
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
 
+    private static Instance _instance = new Instance(new HttpClient());
+
     const string url = "https://localhost:7016/WeatherForecast";
     const int count = 10;
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        // Version 1: new a HttpClient instance every time
-        //TestHttpClientVersion1(url);
-        // Version 2: use using statement to dispose HttpClient instance
-        //TestHttpClientVersion2(url);
-        // Version 3: use static HttpClient and reuse it
-        //TestHttpClientVersion3(url);
-        // Version 4: inject HttpClient instance and reuse it
-        //TestHttpClientVersion4(_httpClient, url);
-        // Version 5: inject HttpClientFactory and create HttpClient instance by it
-        //TestHttpClientVersion5(_httpClientFactory, url);
+        // Scenario 1: new a HttpClient instance every time
+        //TestHttpClientScenario1(url);
+        // Scenario 2: use using statement to dispose HttpClient instance
+        //TestHttpClientScenario2(url);
+        // Scenario 3: use static HttpClient and reuse it
+        //TestHttpClientScenario3(url);
+        // Scenario 4: inject HttpClient instance and reuse it
+        //TestHttpClientScenario4(_httpClient, url);
+        // Scenario 5: inject HttpClientFactory and create HttpClient instance by it
+        //TestHttpClientScenario5(_httpClientFactory, url);
+        // Scenario 6: use static instance with new HttpClient instance
+        //TestHttpClientScenario6(url);
 
         return Task.CompletedTask;
 
-        void TestHttpClientVersion1(string url)
+        void TestHttpClientScenario1(string url)
         {
             for (var i = 0; i < count; i++)
             {
@@ -52,7 +56,7 @@ class Startup(IHttpClientFactory httpClientFactory, HttpClient httpClient) : IHo
             }
         }
 
-        void TestHttpClientVersion2(string url)
+        void TestHttpClientScenario2(string url)
         {
             for (var i = 0; i < count; i++)
             {
@@ -63,7 +67,7 @@ class Startup(IHttpClientFactory httpClientFactory, HttpClient httpClient) : IHo
             }
         }
 
-        void TestHttpClientVersion3(string url)
+        void TestHttpClientScenario3(string url)
         {
             for (var i = 0; i < count; i++)
             {
@@ -73,7 +77,7 @@ class Startup(IHttpClientFactory httpClientFactory, HttpClient httpClient) : IHo
             }
         }
 
-        void TestHttpClientVersion4(HttpClient httpClient, string url)
+        void TestHttpClientScenario4(HttpClient httpClient, string url)
         {
             for (var i = 0; i < count; i++)
             {
@@ -83,7 +87,7 @@ class Startup(IHttpClientFactory httpClientFactory, HttpClient httpClient) : IHo
             }
         }
 
-        void TestHttpClientVersion5(IHttpClientFactory httpClientFactory, string url)
+        void TestHttpClientScenario5(IHttpClientFactory httpClientFactory, string url)
         {
             for (var i = 0; i < count; i++)
             {
@@ -95,7 +99,23 @@ class Startup(IHttpClientFactory httpClientFactory, HttpClient httpClient) : IHo
                 Thread.Sleep(0_100);
             }
         }
+
+        void TestHttpClientScenario6(string url)
+        {
+
+            for (var i = 0; i < count; i++)
+            {
+                _instance.Client.GetAsync(url).GetAwaiter().GetResult();
+                Console.WriteLine(i);
+                Thread.Sleep(0_100);
+            }
+        }
     }
 
     public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+}
+
+public class Instance(HttpClient client)
+{
+    public HttpClient Client { get; } = client;
 }

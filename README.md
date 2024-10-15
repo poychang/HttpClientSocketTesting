@@ -21,6 +21,7 @@ while ($true) { cls; Write-Output "Current: $(Get-Date)"; netstat -na | Select-S
 3. 每次呼叫都使用靜態建立的 HttpClient 實體，並重複用
 4. 使用相依性注入的方式使用 HttpClient
 5. 使用相依性注入的方式使用  HttpClientFactory
+6. 建立 static 物件並傳入 HttpClient 實體，並重複使用
 
 ## netstat
 
